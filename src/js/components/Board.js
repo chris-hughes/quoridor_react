@@ -1,9 +1,24 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Square from './Square'
+import { makeMove } from '../actions'
 
-class Board extends Component {
+const mapStateToProps = (state) => {
+  return {
+    squares: state.squares
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    makeMove: cell => dispatch(makeMove(cell))
+  }
+}
+
+
+class defineBoard extends Component {
   renderSquare(i){
-    return <Square value={i} />
+    return <Square value={this.props.squares[i]} onClick={()=>this.props.makeMove(i)} />
   }
 
   renderBoardRow(j){
@@ -38,5 +53,7 @@ class Board extends Component {
     )
   }
 }
+
+const Board = connect(mapStateToProps,mapDispatchToProps)(defineBoard)
 
 export default Board;
