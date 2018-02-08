@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../../App.css';
+import Board from './Board'
 
 // import Game from './Game'
 
@@ -13,7 +14,7 @@ class App extends Component {
         <p className="App-intro">
           One day we will get this game working
         </p>
-
+        <Board />
       </div>
     );
   }
