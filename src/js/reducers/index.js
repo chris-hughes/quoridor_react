@@ -8,7 +8,11 @@ let initialState = {
 initialState.squares[4]="♙";
 initialState.squares[76]="♟";
 
-function getLegalMoves(cell){
+function getLegalMoves(state){
+  const squares = state.squares.slice();
+  const cell = state.blackIsNext ?
+    squares.indexOf("♟") : squares.indexOf("♙")
+
   let legalMoves=[]
   if (cell % 9 === 0){
     if (Math.floor(cell/9)===0) legalMoves.push(cell+1,cell+9)
@@ -33,7 +37,7 @@ const rootReducer = (state = initialState, action) => {
       const squares = state.squares.slice();
       const indexOfCurrentPlayer = state.blackIsNext ?
         squares.indexOf("♟") : squares.indexOf("♙")
-      const legalMoves = getLegalMoves(indexOfCurrentPlayer);
+      const legalMoves = getLegalMoves(state);
 
       if (squares[action.cell] || legalMoves.indexOf(action.cell)===-1) return state;
 
