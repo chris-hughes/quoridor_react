@@ -2,7 +2,7 @@ import * as types from "../constants/action_types";
 
 const initialState = {
   squares: Array(81).fill(null),
-  redIsNext: true
+  blackIsNext: true
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -10,11 +10,11 @@ const rootReducer = (state = initialState, action) => {
 
     case types.MAKE_MOVE:
         const squares = state.squares.slice();
-        squares[action.cell] = state.redIsNext ? 'R' : 'B'
+        squares[action.cell] = state.blackIsNext ? "♙" : "♟"
 
         return {
           squares: squares,
-          redIsNext: !state.redIsNext
+          blackIsNext: !state.blackIsNext
         }
 
     default:
