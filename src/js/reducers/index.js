@@ -15,16 +15,23 @@ function getLegalMoves(state){
     squares.indexOf("♟") : squares.indexOf("♙")
 
   let legalMoves=[]
+  // you're on the left hand side
   if (cell % 9 === 0){
     if (Math.floor(cell/9)===0) legalMoves.push(cell+1,cell+9)
     else if (Math.floor(cell/9)===8) legalMoves.push(cell+1,cell-9)
     else legalMoves.push(cell+1,cell+9,cell-9)
   }
+  // you're on the right hand side
   else if (cell % 9 === 8){
     if (Math.floor(cell/9)===0) legalMoves.push(cell-1,cell+9)
     else if (Math.floor(cell/9)===8) legalMoves.push(cell-1,cell-9)
     else legalMoves.push(cell-1,cell+9,cell-9)
   }
+  // you're on the top (but not corner as done before)
+  else if (Math.floor(cell/9)===0) legalMoves.push(cell+1,cell-1,cell+9)
+  // you're on the bottom (but not corner as done before)
+  else if (Math.floor(cell/9)===8) legalMoves.push(cell+1,cell-1,cell-9)
+
   else legalMoves.push(cell+1,cell-1,cell+9,cell-9)
 
   return legalMoves;
