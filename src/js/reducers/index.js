@@ -2,7 +2,8 @@ import * as types from "../constants/action_types";
 
 let initialState = {
   squares: Array(81).fill(null),
-  blackIsNext: true
+  blackIsNext: true,
+  winner: null
 }
 
 initialState.squares[4]="♙";
@@ -29,6 +30,13 @@ function getLegalMoves(state){
   return legalMoves;
 }
 
+function calculateWinner(squares){
+
+  if (squares.indexOf("♟") < 9) return "Black"
+  else if (squares.indexOf("♙") > 72) return "White"
+  else return null
+}
+
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -39,14 +47,17 @@ const rootReducer = (state = initialState, action) => {
         squares.indexOf("♟") : squares.indexOf("♙")
       const legalMoves = getLegalMoves(state);
 
-      if (squares[action.cell] || legalMoves.indexOf(action.cell)===-1) return state;
+      if (squares[action.cell] ||
+          legalMoves.indexOf(action.cell)===-1 ||
+          calculateWinner(squares)) return state;
 
       squares[action.cell] = state.blackIsNext ? "♟" : "♙"
       squares[indexOfCurrentPlayer] = null
 
       return {
         squares: squares,
-        blackIsNext: !state.blackIsNext
+        blackIsNext: !state.blackIsNext,
+        winner: calculateWinner(squares)
       }
 
     default:
