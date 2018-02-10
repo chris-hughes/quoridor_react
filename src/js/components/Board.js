@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Square from './Square'
 import Wall from './Wall'
-import { makeMove } from '../actions'
+import { makeMove, placeWall } from '../actions'
+// import { placeWall } from '../actions'
 
 const mapStateToProps = (state) => {
   return {
@@ -12,7 +13,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    makeMove: cell => dispatch(makeMove(cell))
+    makeMove: cell => dispatch(makeMove(cell)),
+    placeWall: cell => dispatch(placeWall(cell))
   }
 }
 
@@ -23,7 +25,7 @@ class defineBoard extends Component {
   }
 
   renderWall(orientation,i){
-    return <Wall class={orientation} onClick={()=>console.log(i)} />
+    return <Wall class={orientation} onClick={()=>this.props.placeWall(i)} />
   }
 
   renderBoardRow(i){

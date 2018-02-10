@@ -66,12 +66,20 @@ const rootReducer = (state = initialState, action) => {
 
       return {
         squares: squares,
-        walls: [],
-        blackWalls: 10,
-        whiteWalls: 10,
+        walls: state.walls,
+        blackWalls: state.blackWalls,
+        whiteWalls: state.whiteWalls,
         blackIsNext: !state.blackIsNext,
         winner: calculateWinner(squares)
       }
+
+    case types.PLACE_WALL:
+      console.log(action.cell)
+      const walls = state.walls.slice()
+
+      walls.push(action.cell);
+
+      return state
 
     default:
       return state

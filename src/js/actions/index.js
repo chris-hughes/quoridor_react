@@ -6,3 +6,10 @@ export const makeMove = (cell) => {
     cell: cell
   }
 }
+
+export const placeWall = (cell) => {
+  return {
+    type: types.PLACE_WALL,
+    cell: cell
+  }
+}
