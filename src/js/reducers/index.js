@@ -2,6 +2,9 @@ import * as types from "../constants/action_types";
 
 let initialState = {
   squares: Array(81).fill(null),
+  walls: [],
+  blackWalls: 10,
+  whiteWalls: 10,
   blackIsNext: true,
   winner: null
 }
@@ -63,6 +66,9 @@ const rootReducer = (state = initialState, action) => {
 
       return {
         squares: squares,
+        walls: [],
+        blackWalls: 10,
+        whiteWalls: 10,
         blackIsNext: !state.blackIsNext,
         winner: calculateWinner(squares)
       }
