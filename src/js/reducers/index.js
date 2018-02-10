@@ -65,10 +65,8 @@ const rootReducer = (state = initialState, action) => {
       squares[indexOfCurrentPlayer] = null
 
       return {
+        ...state,
         squares: squares,
-        walls: state.walls,
-        blackWalls: state.blackWalls,
-        whiteWalls: state.whiteWalls,
         blackIsNext: !state.blackIsNext,
         winner: calculateWinner(squares)
       }
@@ -76,10 +74,15 @@ const rootReducer = (state = initialState, action) => {
     case types.PLACE_WALL:
       console.log(action.cell)
       const walls = state.walls.slice()
-
       walls.push(action.cell);
 
-      return state
+      return {
+        ...state,
+        walls: walls,
+        blackWalls: state.blackIsNext ? state.blackWalls-1 : state.blackWalls,
+        whiteWalls: state.blackIsNext ? state.whiteWalls : state.whiteWalls-1,
+        blackIsNext: !state.blackIsNext
+      }
 
     default:
       return state
