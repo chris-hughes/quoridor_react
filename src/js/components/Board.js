@@ -7,7 +7,8 @@ import { makeMove, placeWall } from '../actions'
 
 const mapStateToProps = (state) => {
   return {
-    squares: state.squares
+    squares: state.squares,
+    walls: state.walls
   }
 }
 
@@ -25,7 +26,13 @@ class defineBoard extends Component {
   }
 
   renderWall(orientation,i){
-    return <Wall class={orientation} onClick={()=>this.props.placeWall(i)} />
+    let wallClass = this.props.walls.indexOf(i)===-1 ?
+      orientation :
+      orientation+" placed"
+    return <Wall
+            class={wallClass}
+            onClick={()=>this.props.placeWall(i)}
+           />
   }
 
   renderBoardRow(i){
@@ -56,21 +63,21 @@ class defineBoard extends Component {
     return (
       <div className="wall-row">
         {this.renderWall('h-wall',i*(8+9)+0+8)}
-        {this.renderWall('s-wall')}
+        {this.renderWall('s-wall',-1)}
         {this.renderWall('h-wall',i*(8+9)+1+8)}
-        {this.renderWall('s-wall')}
+        {this.renderWall('s-wall',-1)}
         {this.renderWall('h-wall',i*(8+9)+2+8)}
-        {this.renderWall('s-wall')}
+        {this.renderWall('s-wall',-1)}
         {this.renderWall('h-wall',i*(8+9)+3+8)}
-        {this.renderWall('s-wall')}
+        {this.renderWall('s-wall',-1)}
         {this.renderWall('h-wall',i*(8+9)+4+8)}
-        {this.renderWall('s-wall')}
+        {this.renderWall('s-wall',-1)}
         {this.renderWall('h-wall',i*(8+9)+5+8)}
-        {this.renderWall('s-wall')}
+        {this.renderWall('s-wall',-1)}
         {this.renderWall('h-wall',i*(8+9)+6+8)}
-        {this.renderWall('s-wall')}
+        {this.renderWall('s-wall',-1)}
         {this.renderWall('h-wall',i*(8+9)+7+8)}
-        {this.renderWall('s-wall')}
+        {this.renderWall('s-wall',-1)}
         {this.renderWall('h-wall',i*(8+9)+8+8)}
       </div>
     )

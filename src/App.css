@@ -104,6 +104,10 @@ ol, ul {
   width: 10px;
 }
 
+.placed {
+  background: black
+}
+
 .game {
   display: flex;
   flex-direction: row;

@@ -72,10 +72,10 @@ const rootReducer = (state = initialState, action) => {
       }
 
     case types.PLACE_WALL:
-      console.log(action.cell)
       const walls = state.walls.slice()
-      walls.push(action.cell);
+      if (action.cell===-1 || walls.indexOf(action.cell)>-1) return state;
 
+      walls.push(action.cell);
       return {
         ...state,
         walls: walls,
