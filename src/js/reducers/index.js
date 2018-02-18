@@ -14,28 +14,62 @@ initialState.squares[280]="♟";
 
 function getLegalMoves(state){
   const squares = state.squares.slice();
+  const walls = state.walls.slice();
   const cell = state.blackIsNext ?
     squares.indexOf("♟") : squares.indexOf("♙")
 
   let legalMoves=[]
   // you're on the left hand side
   if (cell % 34 === 0){
-    if (cell===0) legalMoves.push(2,34)
-    else if (cell===272) legalMoves.push(238,274)
-    else legalMoves.push(cell+2,cell-34,cell+34)
+    if (cell===0){
+      if (!walls.includes(1))  legalMoves.push(2)
+      if (!walls.includes(17)) legalMoves.push(34)
+    }
+    else if (cell===272){
+      if (!walls.includes(255)) legalMoves.push(238)
+      if (!walls.includes(273)) legalMoves.push(274)
+    }
+    else {
+      if (!walls.includes(cell+1))  legalMoves.push(cell+2)
+      if (!walls.includes(cell-17)) legalMoves.push(cell-34)
+      if (!walls.includes(cell+17)) legalMoves.push(cell+34)
+    }
   }
   // you're on the right hand side
   else if ((cell-16) % 34 === 0){
-    if (cell===16) legalMoves.push(14,50)
-    else if (cell===288) legalMoves.push(286,254)
-    else legalMoves.push(cell-2,cell-34,cell+34)
+    if (cell===16){
+      if (!walls.includes(15))  legalMoves.push(14)
+      if (!walls.includes(33))  legalMoves.push(50)
+    }
+    else if (cell===288){
+      if (!walls.includes(287)) legalMoves.push(286)
+      if (!walls.includes(271)) legalMoves.push(254)
+    }
+    else {
+      if (!walls.includes(cell-1))  legalMoves.push(cell-2)
+      if (!walls.includes(cell-17)) legalMoves.push(cell-34)
+      if (!walls.includes(cell+17)) legalMoves.push(cell+34)
+    }
   }
   // you're on the top (but not corner as done before)
-  else if (cell<16) legalMoves.push(cell+2,cell-2,cell+34)
+  else if (cell<16){
+    if (!walls.includes(cell+1))  legalMoves.push(cell+2)
+    if (!walls.includes(cell-1))  legalMoves.push(cell-2)
+    if (!walls.includes(cell+17)) legalMoves.push(cell+34)
+  }
   // you're on the bottom (but not corner as done before)
-  else if (cell>272) legalMoves.push(cell+2,cell-2,cell-34)
+  else if (cell>272){
+    if (!walls.includes(cell+1))  legalMoves.push(cell+2)
+    if (!walls.includes(cell-1))  legalMoves.push(cell-2)
+    if (!walls.includes(cell-17)) legalMoves.push(cell-34)
+  }
 
-  else legalMoves.push(cell+2,cell-2,cell+34,cell-34)
+  else {
+    if (!walls.includes(cell+1))  legalMoves.push(cell+2)
+    if (!walls.includes(cell-1))  legalMoves.push(cell-2)
+    if (!walls.includes(cell+17)) legalMoves.push(cell+34)
+    if (!walls.includes(cell-17)) legalMoves.push(cell-34)
+  }
 
   return legalMoves;
 }
