@@ -198,7 +198,7 @@ export const getLegalMoves = (state) => {
 
 export const calculateWinner = (squares) => {
 
-  if (squares.indexOf("♟") < 7) return "Black"
+  if (squares.indexOf("♟") < 17) return "Black"
   else if (squares.indexOf("♙") > 271) return "White"
   else return null
 }
