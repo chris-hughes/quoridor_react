@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { connect } from 'react-redux'
 import Board from './Board'
+import { newGame } from '../actions'
 
 const mapStateToProps = (state) => {
   return {
@@ -8,6 +9,12 @@ const mapStateToProps = (state) => {
     winner: state.winner,
     blackWalls: state.blackWalls,
     whiteWalls: state.whiteWalls
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    newGame: () => dispatch(newGame())
   }
 }
 
@@ -30,6 +37,7 @@ class defineGame extends Component {
             <p>{status}</p>
             <p>Black walls remaining: {this.props.blackWalls}</p>
             <p>White walls remaining: {this.props.whiteWalls}</p>
+            <input type="button" value="New Game" onClick={()=>this.props.newGame()} />
           </div>
         </div>
       </div>
@@ -37,6 +45,6 @@ class defineGame extends Component {
   }
 }
 
-const Game = connect(mapStateToProps)(defineGame);
+const Game = connect(mapStateToProps,mapDispatchToProps)(defineGame);
 
 export default Game

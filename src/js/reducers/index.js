@@ -117,6 +117,9 @@ const rootReducer = (state = initialState, action) => {
         devMode: !state.devMode
       }
 
+    case types.NEW_GAME:
+      return initialState;
+
     default:
       return state
   }

@@ -3,3 +3,4 @@ export const PLACE_WALL = "PLACE_WALL";
 export const DEV_MODE   = "DEV_MODE";
 export const WALL_HOVER_ON = "WALL_HOVER_ON";
 export const WALL_HOVER_OUT = "WALL_HOVER_OUT";
+export const NEW_GAME   = "NEW_GAME";

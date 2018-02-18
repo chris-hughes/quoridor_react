@@ -21,6 +21,12 @@ export const devMode = () => {
   }
 }
 
+export const newGame = () => {
+  return {
+    type: types.NEW_GAME
+  }
+}
+
 export const wallHoverOn = (cell, orientation) => {
   return {
     type: types.WALL_HOVER_ON,
