@@ -5,7 +5,9 @@ import Board from './Board'
 const mapStateToProps = (state) => {
   return {
     blackIsNext: state.blackIsNext,
-    winner: state.winner
+    winner: state.winner,
+    blackWalls: state.blackWalls,
+    whiteWalls: state.whiteWalls
   }
 }
 
@@ -24,7 +26,11 @@ class defineGame extends Component {
           <Board />
         </div>
         <div className="game-info">
-          <div>{status}</div>
+          <div>
+            <p>{status}</p>
+            <p>Black walls remaining: {this.props.blackWalls}</p>
+            <p>White walls remaining: {this.props.whiteWalls}</p>
+          </div>
         </div>
       </div>
     )

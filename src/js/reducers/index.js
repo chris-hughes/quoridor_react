@@ -109,7 +109,9 @@ const rootReducer = (state = initialState, action) => {
       if (state.walls.indexOf(action.cell)>-1 ||
           action.orientation==='s-wall' ||
           [33,67,101,135,169,203,237,271,
-           273,275,277,279,281,283,285,287].includes(action.cell)
+           273,275,277,279,281,283,285,287].includes(action.cell) ||
+          (state.blackIsNext && state.blackWalls===0) ||
+          (!state.blackIsNext && state.whiteWalls===0)
          )
         return state;
 
@@ -126,15 +128,13 @@ const rootReducer = (state = initialState, action) => {
         walls.push(action.cell,action.cell+17,action.cell+34);
       }
 
-      console.log(action.cell)
-      console.log(action.orientation)
-
-
       return {
         ...state,
         walls: walls,
-        blackWalls: state.blackIsNext ? state.blackWalls-1 : state.blackWalls,
-        whiteWalls: state.blackIsNext ? state.whiteWalls : state.whiteWalls-1,
+        blackWalls: state.blackIsNext ?
+          Math.max(state.blackWalls-1,0) : state.blackWalls,
+        whiteWalls: state.blackIsNext ?
+          state.whiteWalls : Math.max(state.whiteWalls-1,0),
         blackIsNext: !state.blackIsNext
       }
 
