@@ -7,9 +7,10 @@ export const makeMove = (cell) => {
   }
 }
 
-export const placeWall = (cell) => {
+export const placeWall = (cell, orientation) => {
   return {
     type: types.PLACE_WALL,
-    cell: cell
+    cell: cell,
+    orientation: orientation
   }
 }

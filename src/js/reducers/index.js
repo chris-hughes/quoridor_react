@@ -72,10 +72,30 @@ const rootReducer = (state = initialState, action) => {
       }
 
     case types.PLACE_WALL:
-      const walls = state.walls.slice()
-      if (action.cell===-1 || walls.indexOf(action.cell)>-1) return state;
+      if (state.walls.indexOf(action.cell)>-1 ||
+          action.orientation==='s-wall' ||
+          [33,67,101,135,169,203,237,271,
+           273,275,277,279,281,283,285,287].includes(action.cell)
+         )
+        return state;
 
-      walls.push(action.cell);
+      const walls = state.walls.slice()
+
+      if (action.orientation==='h-wall'){
+        if (walls.includes(action.cell+1) || walls.includes(action.cell+2))
+          return state;
+        walls.push(action.cell,action.cell+1,action.cell+2);
+      }
+      else if (action.orientation==='v-wall'){
+        if (walls.includes(action.cell+17) || walls.includes(action.cell+34))
+          return state;
+        walls.push(action.cell,action.cell+17,action.cell+34);
+      }
+
+      console.log(action.cell)
+      console.log(action.orientation)
+
+
       return {
         ...state,
         walls: walls,

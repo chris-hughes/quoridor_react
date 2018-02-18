@@ -15,7 +15,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     makeMove: cell => dispatch(makeMove(cell)),
-    placeWall: cell => dispatch(placeWall(cell))
+    placeWall: (cell, orientation) => dispatch(placeWall(cell, orientation))
   }
 }
 
@@ -35,7 +35,7 @@ class defineBoard extends Component {
       orientation+" placed"
     return <Wall
             class={wallClass}
-            onClick={()=>this.props.placeWall(i)}
+            onClick={()=>this.props.placeWall(i,wallClass)}
             num = {i}
            />
   }
