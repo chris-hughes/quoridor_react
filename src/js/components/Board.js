@@ -8,7 +8,8 @@ import { makeMove, placeWall } from '../actions'
 const mapStateToProps = (state) => {
   return {
     squares: state.squares,
-    walls: state.walls
+    walls: state.walls,
+    devMode: state.devMode
   }
 }
 
@@ -25,7 +26,7 @@ class defineBoard extends Component {
     return <Square
               value={this.props.squares[i]}
               onClick={()=>this.props.makeMove(i)}
-             num = {i}
+              num = {this.props.devMode ? i : null}
            />
   }
 
@@ -36,7 +37,7 @@ class defineBoard extends Component {
     return <Wall
             class={wallClass}
             onClick={()=>this.props.placeWall(i,wallClass)}
-           num = {i}
+            num = {this.props.devMode ? i : null}
            />
   }
 

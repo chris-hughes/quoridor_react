@@ -14,3 +14,9 @@ export const placeWall = (cell, orientation) => {
     orientation: orientation
   }
 }
+
+export const devMode = () => {
+  return {
+    type: types.DEV_MODE
+  }
+}

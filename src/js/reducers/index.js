@@ -6,7 +6,8 @@ let initialState = {
   blackWalls: 10,
   whiteWalls: 10,
   blackIsNext: true,
-  winner: null
+  winner: null,
+  devMode: true
 }
 
 initialState.squares[8]="♙";
@@ -272,6 +273,12 @@ const rootReducer = (state = initialState, action) => {
         whiteWalls: state.blackIsNext ?
           state.whiteWalls : Math.max(state.whiteWalls-1,0),
         blackIsNext: !state.blackIsNext
+      }
+
+    case types.DEV_MODE:
+      return {
+        ...state,
+        devMode: !state.devMode
       }
 
     default:
