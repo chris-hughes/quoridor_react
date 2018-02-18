@@ -8,7 +8,8 @@ let initialState = {
   whiteWalls: 10,
   blackIsNext: true,
   winner: null,
-  devMode: true
+  devMode: true,
+  wallHovered: []
 }
 
 initialState.squares[8]="♙";
@@ -40,6 +41,7 @@ const rootReducer = (state = initialState, action) => {
     case types.PLACE_WALL:
       if (state.walls.indexOf(action.cell)>-1 ||
           action.orientation==='s-wall' ||
+          // walls at the edge
           [33,67,101,135,169,203,237,271,
            273,275,277,279,281,283,285,287].includes(action.cell) ||
           (state.blackIsNext && state.blackWalls===0) ||
@@ -68,6 +70,45 @@ const rootReducer = (state = initialState, action) => {
         whiteWalls: state.blackIsNext ?
           state.whiteWalls : Math.max(state.whiteWalls-1,0),
         blackIsNext: !state.blackIsNext
+      }
+
+    case types.WALL_HOVER_ON:
+      if (action.orientation==='s-wall' ||
+          // walls at the edge
+          [33,67,101,135,169,203,237,271,
+           273,275,277,279,281,283,285,287].includes(action.cell)
+      ) return state;
+
+      if (action.orientation==='h-wall'){
+        if (state.walls.includes(action.cell) ||
+            state.walls.includes(action.cell+1) ||
+            state.walls.includes(action.cell+2)
+        ) return state
+
+        return {
+          ...state,
+          wallHovered: [action.cell,action.cell+1,action.cell+2]
+        }
+      }
+
+      if (action.orientation==='v-wall'){
+        if (state.walls.includes(action.cell) ||
+            state.walls.includes(action.cell+17) ||
+            state.walls.includes(action.cell+34)
+        ) return state
+
+        return {
+          ...state,
+          wallHovered: [action.cell,action.cell+17,action.cell+34]
+        }
+      }
+
+      else return state
+
+    case types.WALL_HOVER_OUT:
+      return {
+        ...state,
+        wallHovered: []
       }
 
     case types.DEV_MODE:

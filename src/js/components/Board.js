@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Square from './Square'
 import Wall from './Wall'
-import { makeMove, placeWall } from '../actions'
+import { makeMove, placeWall, wallHoverOn , wallHoverOut} from '../actions'
 import { getLegalMoves } from '../helpers'
 // import { placeWall } from '../actions'
 
@@ -11,14 +11,17 @@ const mapStateToProps = (state) => {
     squares: state.squares,
     walls: state.walls,
     blackIsNext: state.blackIsNext,
-    devMode: state.devMode
+    devMode: state.devMode,
+    wallHovered: state.wallHovered
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     makeMove: cell => dispatch(makeMove(cell)),
-    placeWall: (cell, orientation) => dispatch(placeWall(cell, orientation))
+    placeWall: (cell, orientation) => dispatch(placeWall(cell, orientation)),
+    wallHoverOn: (cell, orientation) => dispatch(wallHoverOn(cell, orientation)),
+    wallHoverOut: (cell, orientation) => dispatch(wallHoverOut(cell, orientation)),
   }
 }
 
@@ -39,9 +42,13 @@ class defineBoard extends Component {
     let wallClass = this.props.walls.indexOf(i)===-1 ?
       orientation :
       orientation+" placed"
+
+    if (this.props.wallHovered.includes(i)) wallClass = orientation+" hoover"
     return <Wall
             class={wallClass}
-            onClick={()=>this.props.placeWall(i,wallClass)}
+            onClick={()=>this.props.placeWall(i,orientation)}
+            onMouseOver={()=>this.props.wallHoverOn(i,orientation)}
+            onMouseOut={()=>this.props.wallHoverOut(i,orientation)}
             num = {this.props.devMode ? i : null}
            />
   }

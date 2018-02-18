@@ -113,6 +113,11 @@ ol, ul {
   border: 1px solid black;
 }
 
+.hoover {
+  background: purple;
+  border: 1px solid purple;
+}
+
 .game {
   display: flex;
   flex-direction: row;

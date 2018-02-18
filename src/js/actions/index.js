@@ -20,3 +20,19 @@ export const devMode = () => {
     type: types.DEV_MODE
   }
 }
+
+export const wallHoverOn = (cell, orientation) => {
+  return {
+    type: types.WALL_HOVER_ON,
+    cell: cell,
+    orientation: orientation
+  }
+}
+
+export const wallHoverOut = (cell, orientation) => {
+  return {
+    type: types.WALL_HOVER_OUT,
+    cell: cell,
+    orientation: orientation
+  }
+}
