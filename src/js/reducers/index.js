@@ -9,8 +9,8 @@ let initialState = {
   winner: null
 }
 
-initialState.squares[4]="♙";
-initialState.squares[76]="♟";
+initialState.squares[8]="♙";
+initialState.squares[280]="♟";
 
 function getLegalMoves(state){
   const squares = state.squares.slice();

@@ -67,23 +67,23 @@ class defineBoard extends Component {
   renderWallRow(i){
     return (
       <div className="wall-row">
-        {this.renderWall('h-wall',(i+1)*16+1)}
-        {this.renderWall('s-wall',(i+1)*16+2)}
-        {this.renderWall('h-wall',(i+1)*16+3)}
-        {this.renderWall('s-wall',(i+1)*16+4)}
-        {this.renderWall('h-wall',(i+1)*16+5)}
-        {this.renderWall('s-wall',(i+1)*16+6)}
-        {this.renderWall('h-wall',(i+1)*16+7)}
-        {this.renderWall('s-wall',(i+1)*16+8)}
-        {this.renderWall('h-wall',(i+1)*16+9)}
-        {this.renderWall('s-wall',(i+1)*16+10)}
-        {this.renderWall('h-wall',(i+1)*16+11)}
-        {this.renderWall('s-wall',(i+1)*16+12)}
-        {this.renderWall('h-wall',(i+1)*16+13)}
-        {this.renderWall('s-wall',(i+1)*16+14)}
-        {this.renderWall('h-wall',(i+1)*16+15)}
-        {this.renderWall('s-wall',(i+1)*16+16)}
-        {this.renderWall('h-wall',(i+1)*16+17)}
+        {this.renderWall('h-wall',i*34+16+1)}
+        {this.renderWall('s-wall',i*34+16+2)}
+        {this.renderWall('h-wall',i*34+16+3)}
+        {this.renderWall('s-wall',i*34+16+4)}
+        {this.renderWall('h-wall',i*34+16+5)}
+        {this.renderWall('s-wall',i*34+16+6)}
+        {this.renderWall('h-wall',i*34+16+7)}
+        {this.renderWall('s-wall',i*34+16+8)}
+        {this.renderWall('h-wall',i*34+16+9)}
+        {this.renderWall('s-wall',i*34+16+10)}
+        {this.renderWall('h-wall',i*34+16+11)}
+        {this.renderWall('s-wall',i*34+16+12)}
+        {this.renderWall('h-wall',i*34+16+13)}
+        {this.renderWall('s-wall',i*34+16+14)}
+        {this.renderWall('h-wall',i*34+16+15)}
+        {this.renderWall('s-wall',i*34+16+16)}
+        {this.renderWall('h-wall',i*34+16+17)}
       </div>
     )
   }
