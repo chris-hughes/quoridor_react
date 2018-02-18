@@ -25,7 +25,7 @@ class defineBoard extends Component {
     return <Square
               value={this.props.squares[i]}
               onClick={()=>this.props.makeMove(i)}
-            //  num = {i}
+             num = {i}
            />
   }
 
@@ -36,7 +36,7 @@ class defineBoard extends Component {
     return <Wall
             class={wallClass}
             onClick={()=>this.props.placeWall(i,wallClass)}
-          //  num = {i}
+           num = {i}
            />
   }
 

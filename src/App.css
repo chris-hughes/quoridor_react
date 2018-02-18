@@ -105,7 +105,8 @@ ol, ul {
 }
 
 .placed {
-  background: black
+  background: black;
+  border: 1px solid black;
 }
 
 .game {
