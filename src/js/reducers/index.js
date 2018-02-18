@@ -19,23 +19,23 @@ function getLegalMoves(state){
 
   let legalMoves=[]
   // you're on the left hand side
-  if (cell % 9 === 0){
-    if (Math.floor(cell/9)===0) legalMoves.push(cell+1,cell+9)
-    else if (Math.floor(cell/9)===8) legalMoves.push(cell+1,cell-9)
-    else legalMoves.push(cell+1,cell+9,cell-9)
+  if (cell % 34 === 0){
+    if (cell===0) legalMoves.push(2,34)
+    else if (cell===272) legalMoves.push(238,274)
+    else legalMoves.push(cell+2,cell-34,cell+34)
   }
   // you're on the right hand side
-  else if (cell % 9 === 8){
-    if (Math.floor(cell/9)===0) legalMoves.push(cell-1,cell+9)
-    else if (Math.floor(cell/9)===8) legalMoves.push(cell-1,cell-9)
-    else legalMoves.push(cell-1,cell+9,cell-9)
+  else if ((cell-16) % 34 === 0){
+    if (cell===16) legalMoves.push(14,50)
+    else if (cell===288) legalMoves.push(286,254)
+    else legalMoves.push(cell-2,cell-34,cell+34)
   }
   // you're on the top (but not corner as done before)
-  else if (Math.floor(cell/9)===0) legalMoves.push(cell+1,cell-1,cell+9)
+  else if (cell<16) legalMoves.push(cell+2,cell-2,cell+34)
   // you're on the bottom (but not corner as done before)
-  else if (Math.floor(cell/9)===8) legalMoves.push(cell+1,cell-1,cell-9)
+  else if (cell>272) legalMoves.push(cell+2,cell-2,cell-34)
 
-  else legalMoves.push(cell+1,cell-1,cell+9,cell-9)
+  else legalMoves.push(cell+2,cell-2,cell+34,cell-34)
 
   return legalMoves;
 }
