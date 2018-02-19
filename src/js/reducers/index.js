@@ -51,6 +51,57 @@ const rootReducer = (state = initialState, action) => {
 
       const walls = state.walls.slice()
 
+
+      const easystarjs = require('easystarjs');
+      const easystar = new easystarjs.js();
+
+      const sWalls = [
+        18,20,22,24,26,28,30,32,52,54,56,58,60,62,64,66,86,88,90,92,94,96,98,100,
+        120,122,124,126,128,130,132,134,154,156,158,160,162,164,166,168,188,190,
+        192,194,196,198,200,202,222,224,226,228,230,232,234,236,256,258,260,262,
+        264,266,268,270];
+
+      let tilemap = Array(17).fill(null);
+      tilemap.forEach((i,j)=>{
+        tilemap[j] = Array(17).fill(0);
+      })
+
+      // square walls
+      sWalls.forEach((w)=>{
+        tilemap[Math.floor(w/17)][w % 17]=1;
+      })
+
+      // already placed walls
+      walls.forEach((w)=>{
+        tilemap[Math.floor(w/17)][w % 17]=1;
+      })
+
+      const cell = state.blackIsNext ?
+        state.squares.indexOf("♟") : state.squares.indexOf("♙")
+      const otherCell = state.blackIsNext ?
+        state.squares.indexOf("♙") : state.squares.indexOf("♟")
+
+      // do i need to improve this to allow for jumps???
+      tilemap[Math.floor(otherCell/17)][otherCell % 17]=1;
+
+      easystar.setGrid(tilemap);
+      easystar.setAcceptableTiles([0]);
+      easystar.findPath(Math.floor(cell/17),cell % 17,16,0,(path)=>{
+	      if (path===null){
+		      alert("Path was not found.");
+	      } else {
+          console.log(tilemap)
+          path.forEach((i,j)=>{
+            // console.log(i)
+            // console.log(j)
+            console.log("Move: "+j+" ["+path[j].x+","+path[j].y+"]")
+          })
+	      }
+      });
+      easystar.calculate();
+
+
+
       if (action.orientation==='h-wall'){
         if (walls.includes(action.cell+1) || walls.includes(action.cell+2))
           return state;
